@@ -1,0 +1,82 @@
+% Titel: Examinierande Laboration
+% Kurs: Matematisk statistik och linjär algebra (MA074G)
+% Namn: Christine Olsson Calmell
+% Datum: 2022-12-14
+
+%Laddar in fil
+load Sundsvall.dat
+
+%sparar varje kolumn i egen vector
+datum = Sundsvall(:,1);
+dygnsmedel = Sundsvall(:,2);
+dygnsmax = Sundsvall(:,3);
+dygnsmin = Sundsvall(:,4);
+
+% 1. Hur många dagar finns det mätvärden för? [3653]
+length(datum)
+
+% 2. Plotta histogram över var och en av dygnsmedelvärdena, 
+%    dygnsmaxvärden och dygnsminvärdena
+%    
+%    20 klasser valda. (i efterhand hade det varit bättre med ca en klass 
+%    per grad)
+%    Klassgränserna 2.7 vilket jag anser är rimligt i temperatur sammanhang
+histogram(dygnsmedel, 20)
+ylabel('Dagar')
+xlabel('Grader i celsius')
+title('Dygnsmedel Sundsvalls flygplats (2008-2017)')
+
+
+histogram(dygnsmax, 20)
+ylabel('Dagar')
+xlabel('Grader i celsius')
+title('Dygnsmax Sundsvall flygplats (2008-2017)')
+
+histogram(dygnsmin, 20)
+ylabel('Dagar')
+xlabel('Grader i celsius')
+title('Dygnsmin Sundsvall flygplats (2008-2017)')
+
+
+%3. Vilken temperatur är det kallaste dygnsmedelvärdet och vid vilket datum
+%   inträffar den? Är det samma för det kallaste dygnsminvärdet?
+%   Det finns flera sätt att komma fram till rätt svar, 
+%   men här efterfrågas kommandon som ger
+%   sökta temperaturer och motsvarande datum.
+
+
+[minDygnsmed, Where] = min(dygnsmedel)
+datum(Where)
+
+[minDygnsmin, Where] = min(dygnsmin)
+datum(Where)
+
+%4. Plotta dygnsmedelvärden som punkter i en figur.
+%   Det går bra med index som x‑koordinat, 
+%   dvs. det behövs ingen separat x‑vektor i plotfunk‑tionen. 
+%   Med punkter menas att mätvärdena ej ska sammanbindas med linjer i figuren
+plot(dygnsmedel,'.')
+xlabel('dag')
+ylabel('Grader i celsius')
+title('Dygnsmedelvärde temperatur Sundsvall flygplats (2008-2017)')
+
+
+%5. Beräkna medelvärde, median, varians och standardavvikelse för dygns‑
+%   medelvärdena.
+%   Använd separata kommandon för läges‑ och spridningsmåtten, dvs. beräkna ej standardav‑
+%   vikelsen med hjälp av den beräknade variansen.
+mean(dygnsmedel)
+round(mean(dygnsmedel))
+
+median(dygnsmedel)
+var(dygnsmedel)
+
+std(dygnsmedel)
+
+%6. Plotta en experimentell fördelningsfunktion för dygnsmedelvärdena. Upp‑
+%   skatta med tre decimalers noggrannhet (tre decimaler efter kommatecknet)
+%   sannolikheten för att dygnsmedelvärdena är större än 10 ◦C.
+%   Tips: man kan zooma i figuren för plotten.
+
+cdfplot(dygnsmedel)
+
